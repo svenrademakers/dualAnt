@@ -9,19 +9,24 @@
 
 #define ANT_SYNCA 0b10100100
 #define ANT_SYNCB 0b10100101
+#define PARSE_BUFFER 30
+#define MESSAGE_HEADER_SIZE 5;
 
-class AntParser: public etl::observer<const etl::ivector<uint8_t>&>
+typedef etl::observer<int> MessagePending;
+
+class AntParser: public etl::observer<uint8_t>,
+		public etl::observable<MessagePending, 1>
 {
 public:
 	AntParser();
     virtual ~AntParser() {}
 
-	virtual void notification(const etl::ivector<uint8_t>& message);
+	virtual void notification(uint8_t byte);
 	void GetLastProcessed(AntMessageVariant& message);
 
 private:
 	AntMessageFactory factory;
-	AntMessageVariant message;
+	etl::vector<uint8_t, PARSE_BUFFER> recvBuffer;
 };
 
 #endif

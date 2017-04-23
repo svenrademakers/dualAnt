@@ -1,36 +1,44 @@
 #include "AntParser.h"
 #include <algorithm>
 
-namespace {
+namespace
+{
 
-bool isSyncByte(uint8_t b) {
+bool isSyncByte(uint8_t b)
+{
 	return b == ANT_SYNCA || b == ANT_SYNCB;
 }
 
 }
 
 AntParser::AntParser()
+: recvBuffer(0)
 {
 }
 
-void AntParser::notification(const etl::ivector<uint8_t>& message) {
+void AntParser::notification(const uint8_t byte)
+{
+	if ((recvBuffer.size()) == 0 && !isSyncByte(byte))
+		return;
 
-	if (!message.empty()) {
-		etl::ivector<uint8_t>::const_iterator it = std::find_if(
-				message.cbegin(), message.cend(), isSyncByte);
+	recvBuffer.push_back(byte);
 
-		etl::ivector<uint8_t>::const_iterator end = message.end();
+	if (recvBuffer.size() == 1)
+		return;
 
-		if (it != message.end())
-		{
-			factory.createMessage(0x0, this->message);
-			if (this->message.is_valid()) {
-				this->message.get<AntMessage>().Parse(it, end);
-			}
-		}
+	uint8_t size = MESSAGE_HEADER_SIZE + recvBuffer[1];
+	if (recvBuffer.size() >= size)
+	{
+		notify_observers(1);
 	}
 }
 
-void AntParser::GetLastProcessed(AntMessageVariant& message) {
-	message = this->message;
+void AntParser::GetLastProcessed(AntMessageVariant& message)
+{
+	if (recvBuffer.size() >= recvBuffer[1])
+	{
+		factory.createMessage(recvBuffer[2], message);
+		message.get<AntBaseMessage>().Parse(recvBuffer);
+		recvBuffer.clear();
+	}
 }

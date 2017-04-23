@@ -4,30 +4,39 @@
 #include "variant.h"
 #include "vector.h"
 
-class AntConfigurationMessage;
-class AntMessage;
-
-typedef etl::variant<AntMessage, AntConfigurationMessage> AntMessageVariant;
+#define ANT_HEADERSIZE 5
 
 class AntMessage {
-
 public:
-
-	AntMessage() = default;
-
 	virtual ~AntMessage() {
 	}
 
-	virtual void Parse(etl::ivector<uint8_t>::const_iterator& begin,
-			etl::ivector<uint8_t>::const_iterator& end);
-
-	etl::ivector<uint8_t>::const_iterator begin;
-	etl::ivector<uint8_t>::const_iterator end;
-
+	virtual void Parse(etl::ivector<uint8_t>& data) = 0;
 };
 
-class AntConfigurationMessage: public AntMessage {
+class AntBaseMessage: public AntMessage {
 public:
-	AntConfigurationMessage() = default;
+    AntBaseMessage()
+    : rawBuffer(nullptr)
+    {
+        
+    }
+	virtual void Parse(etl::ivector<uint8_t>& data) {
+		rawBuffer = &data;
+	}
+
+	etl::ivector<uint8_t>* rawBuffer;
 };
+
+class UnassignChannel: public AntMessage {
+public:
+	uint8_t channelId;
+
+	virtual void Parse(etl::ivector<uint8_t>& data) {
+		channelId = data[3];
+	}
+};
+
+typedef etl::variant<AntBaseMessage, UnassignChannel> AntMessageVariant;
+
 #endif
