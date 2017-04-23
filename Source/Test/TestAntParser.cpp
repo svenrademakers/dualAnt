@@ -25,7 +25,6 @@ public:
 
 protected:
 	AntParser parser;
-	AntMessageVariant message;
 	::testing::StrictMock<MessageObserver> observer_mock;
 
 	void PushData(std::vector<uint8_t>& data) {
@@ -37,12 +36,55 @@ protected:
 };
 
 TEST_F(TestAntParser, ignore_message_without_sync_byte) {
+	AntMessageVariant message;
 	std::vector<uint8_t> vec = { 0x11, 0x22, 0x33 };
 	PushData(vec);
-	parser.GetLastProcessed(message);
 
+	EXPECT_CALL(observer_mock, notify(::testing::_)).Times(0);
 	EXPECT_FALSE(message.is_valid());
 }
+
+TEST_F(TestAntParser, ignore_message_with_invalid_crc) {
+	AntMessageVariant message;
+	std::vector<uint8_t> vec = { ANT_SYNCA, 0x01, 0x41, 0xFF, 0xAA};
+	PushData(vec);
+
+	EXPECT_CALL(observer_mock, notify(::testing::_)).Times(0);
+	EXPECT_FALSE(message.is_valid());
+}
+
+
+TEST_F(TestAntParser, internal_buffer_is_cleared_after_processing) {
+	AntMessageVariant message;
+	EXPECT_CALL(observer_mock, notify(::testing::_)).Times(2);
+
+	std::vector<uint8_t> vec = { ANT_SYNCA, 0x01, 0x41, 0xFF, 0x1B};
+	PushData(vec);
+
+	parser.GetLastProcessed(message);
+	EXPECT_TRUE(message.is_valid());
+
+	 vec = { ANT_SYNCA, 0x01, 0x41, 0xAA, 0x4E};
+	 PushData(vec);
+
+	parser.GetLastProcessed(message);
+	EXPECT_TRUE(message.is_valid());
+}
+
+TEST_F(TestAntParser, parse_unassignedChannel_message)
+{
+	AntMessageVariant message;
+	EXPECT_CALL(observer_mock, notify(::testing::_)).Times(1);
+	std::vector<uint8_t> vec = { 0xBB, ANT_SYNCA, 0x01, 0x41, 0xFF, 0x1B};
+    PushData(vec);
+
+	parser.GetLastProcessed(message);
+	EXPECT_TRUE(message.is_valid());
+	EXPECT_TRUE(message.is_type<UnassignChannel>());
+	EXPECT_EQ(message.get<UnassignChannel>().channelId, 0xFF);
+}
+
+//
 //
 //TEST_F(TestAntParser, get_unparsable_ant_message_ignore_unexpected_start_bytes) {
 //	std::vector<uint8_t> vec =

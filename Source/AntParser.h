@@ -10,7 +10,7 @@
 #define ANT_SYNCA 0b10100100
 #define ANT_SYNCB 0b10100101
 #define PARSE_BUFFER 30
-#define MESSAGE_HEADER_SIZE 5;
+#define MESSAGE_HEADER_SIZE 4
 
 typedef etl::observer<int> MessagePending;
 
@@ -25,6 +25,8 @@ public:
 	void GetLastProcessed(AntMessageVariant& message);
 
 private:
+	bool CrcCheck();
+	bool ValidMessage();
 	AntMessageFactory factory;
 	etl::vector<uint8_t, PARSE_BUFFER> recvBuffer;
 };

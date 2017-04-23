@@ -6,35 +6,40 @@
 
 #define ANT_HEADERSIZE 5
 
-class AntMessage {
+class AntMessage
+{
 public:
-	virtual ~AntMessage() {
-	}
+	virtual ~AntMessage() {	}
 
 	virtual void Parse(etl::ivector<uint8_t>& data) = 0;
 };
 
-class AntBaseMessage: public AntMessage {
+class AntBaseMessage: public AntMessage
+{
 public:
-    AntBaseMessage()
-    : rawBuffer(nullptr)
-    {
-        
-    }
-	virtual void Parse(etl::ivector<uint8_t>& data) {
-		rawBuffer = &data;
-	}
+	AntBaseMessage(uint8_t messageId)
+	: messageId(messageId)
+	{ }
 
-	etl::ivector<uint8_t>* rawBuffer;
+	virtual void Parse(etl::ivector<uint8_t>& data)
+	{ }
+
+	const uint8_t messageId;
 };
 
-class UnassignChannel: public AntMessage {
+class UnassignChannel: public AntBaseMessage
+{
 public:
-	uint8_t channelId;
+	UnassignChannel()
+	: AntBaseMessage(0x41)
+	, channelId(0)
+	{ }
 
 	virtual void Parse(etl::ivector<uint8_t>& data) {
 		channelId = data[3];
 	}
+
+	uint8_t channelId;
 };
 
 typedef etl::variant<AntBaseMessage, UnassignChannel> AntMessageVariant;

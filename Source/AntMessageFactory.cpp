@@ -11,6 +11,6 @@ void AntMessageFactory::createMessage(uint8_t id, AntMessageVariant& message) {
 		(*(iter->second))(message);
 	}
 	else {
-		message = AntBaseMessage();
+		message = AntBaseMessage(0xFF);
 	}
 }
