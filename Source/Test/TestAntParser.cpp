@@ -36,7 +36,7 @@ protected:
 };
 
 TEST_F(TestAntParser, ignore_message_without_sync_byte) {
-	AntMessageVariant message;
+	AntMessage message;
 	std::vector<uint8_t> vec = { 0x11, 0x22, 0x33 };
 	PushData(vec);
 
@@ -45,7 +45,7 @@ TEST_F(TestAntParser, ignore_message_without_sync_byte) {
 }
 
 TEST_F(TestAntParser, ignore_message_with_invalid_crc) {
-	AntMessageVariant message;
+	AntMessage message;
 	std::vector<uint8_t> vec = { ANT_SYNCA, 0x01, 0x41, 0xFF, 0xAA};
 	PushData(vec);
 
@@ -55,7 +55,7 @@ TEST_F(TestAntParser, ignore_message_with_invalid_crc) {
 
 
 TEST_F(TestAntParser, internal_buffer_is_cleared_after_processing) {
-	AntMessageVariant message;
+	AntMessage message;
 	EXPECT_CALL(observer_mock, notify(::testing::_)).Times(2);
 
 	std::vector<uint8_t> vec = { ANT_SYNCA, 0x01, 0x41, 0xFF, 0x1B};
@@ -73,7 +73,7 @@ TEST_F(TestAntParser, internal_buffer_is_cleared_after_processing) {
 
 TEST_F(TestAntParser, parse_unassignedChannel_message)
 {
-	AntMessageVariant message;
+	AntMessage message;
 	EXPECT_CALL(observer_mock, notify(::testing::_)).Times(1);
 	std::vector<uint8_t> vec = { 0xBB, ANT_SYNCA, 0x01, 0x41, 0xFF, 0x1B};
     PushData(vec);
@@ -83,26 +83,3 @@ TEST_F(TestAntParser, parse_unassignedChannel_message)
 	EXPECT_TRUE(message.is_type<UnassignChannel>());
 	EXPECT_EQ(message.get<UnassignChannel>().channelId, 0xFF);
 }
-
-//
-//
-//TEST_F(TestAntParser, get_unparsable_ant_message_ignore_unexpected_start_bytes) {
-//	std::vector<uint8_t> vec =
-//	{ 0x11, ANT_SYNCA, 0x02, 0xAA, 0xBB, 0xAA, 0xFF, 0xFF };
-//
-//    EXPECT_CALL(observer_mock, notify(::testing::_)).Times(11);
-//
-//	PushData(vec);
-//	parser.GetLastProcessed(message);
-//
-//	EXPECT_TRUE(message.is_valid());
-//    EXPECT_TRUE(message.is_type<AntBaseMessage>());
-//
-//	auto rawOutput = std::vector<uint8_t>(vec.begin() + 1, vec.end());
-//
-//	AntBaseMessage& ant = message.get<AntBaseMessage>();
-//	auto rawMessage = std::vector<uint8_t>(ant.rawBuffer->begin(),
-//			ant.rawBuffer->end());
-//
-//	EXPECT_EQ(rawMessage, rawOutput);
-//}

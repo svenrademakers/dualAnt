@@ -1,11 +1,11 @@
 #ifndef ANT_PARSER_HPP
 #define ANT_PARSER_HPP
 
+#include "AntMessageFactory.h"
 #include <stdint.h>
 #include "vector.h"
 #include "function.h"
 #include "observer.h"
-#include "AntMessageFactory.h"
 
 #define ANT_SYNCA 0b10100100
 #define ANT_SYNCB 0b10100101
@@ -22,7 +22,7 @@ public:
     virtual ~AntParser() {}
 
 	virtual void notification(uint8_t byte);
-	void GetLastProcessed(AntMessageVariant& message);
+	void GetLastProcessed(AntMessage& message);
 
 private:
 	bool CrcCheck();

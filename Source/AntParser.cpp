@@ -14,7 +14,7 @@ bool isSyncByte(uint8_t b)
 AntParser::AntParser()
 : recvBuffer(0)
 {
-	factory.registerClass<UnassignChannel>(UnassignChannel().messageId);
+	factory.registerClass<UnassignChannel>(0x41);
 }
 
 void AntParser::notification(const uint8_t byte)
@@ -28,14 +28,14 @@ void AntParser::notification(const uint8_t byte)
 		notify_observers(1);
 }
 
-void AntParser::GetLastProcessed(AntMessageVariant& message)
+void AntParser::GetLastProcessed(AntMessage& message)
 {
 	if (ValidMessage())
 	{
-		factory.createMessage(recvBuffer[2], message);
+		factory.CreateMessage(recvBuffer[2], message);
 
 		// really need
-		message.get<AntBaseMessage>().Parse(recvBuffer);
+		message.get<AntResponseMessage>().Parse(recvBuffer);
 		recvBuffer.clear();
 	}
 }
