@@ -4,7 +4,7 @@ find_package(GTest REQUIRED)
 
 include_directories(${GTEST_INCLUDE_DIRS} ../ ${CMAKE_CURRENT_SOURCE_DIR}/../External/etl/src)
 
-add_executable(runAllTests test.cpp TestHbAlgo.cpp TestAntParser.cpp TestSensorSniffer.cpp)
+add_executable(runAllTests test.cpp TestHbAlgo.cpp TestAntHost.cpp TestSensorSniffer.cpp)
 
 target_link_libraries(runAllTests PerformanceAnalytics ${GTEST_LIBRARIES} /usr/local/lib/libgmock.a pthread )
 

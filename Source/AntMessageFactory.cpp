@@ -1,4 +1,4 @@
-#include "AntParser.h"
+#include "AntHost.h"
 
 bool AntMessageFactory::MessageTypeAvailable(uint8_t id){
 	return mObjectCreator.find(id) != mObjectCreator.end();
@@ -11,6 +11,6 @@ void AntMessageFactory::CreateMessage(uint8_t id, AntMessage& message) {
 		(*(iter->second))(message);
 	}
 	else {
-		message = UnkownMessage();
+		message = ErrorMessage(ErrorMessage::Reason::messageNotSupported);
 	}
 }

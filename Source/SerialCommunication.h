@@ -5,10 +5,12 @@
 
 class AntRequestMessage;
 
-class ISerialCommunication
+class ISynchronousCommunication
 {
 public:
 	virtual void Write(const etl::ivector<uint8_t>& data) = 0;
+	virtual uint8_t ReadByte() = 0;
+	virtual void Init() = 0;
 };
 
 class IAntProxy

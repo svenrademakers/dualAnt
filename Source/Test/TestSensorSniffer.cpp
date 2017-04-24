@@ -16,7 +16,7 @@ public:
 	MOCK_METHOD1(ExecuteCommand, void(const AntRequestMessage&));
 };
 
-class SerialCommunicationMock : public ISerialCommunication
+class SerialCommunicationMock : public ISynchronousCommunication
 {
 public:
 	MOCK_METHOD1(Write, void(const etl::ivector<uint8_t>&));

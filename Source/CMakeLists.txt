@@ -15,4 +15,4 @@ endif()
 add_subdirectory (Test)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/External/etl/src)
-add_library(${PROJECT_NAME} HbAlgo.cpp AntParser.cpp SensorSniffer.cpp AntMessageFactory.cpp SerialCommunication.cpp AntMessage.cpp)
+add_library(${PROJECT_NAME} HbAlgo.cpp AntHost.cpp SensorSniffer.cpp AntMessageFactory.cpp SerialCommunication.cpp AntMessage.cpp)

@@ -32,10 +32,23 @@ private:
 	static const etl::array<uint8_t, 8> networkKey;
 };
 
-class UnkownMessage : public AntResponseMessage
+class ErrorMessage : public AntResponseMessage
 {
+public:
+	enum Reason
+	{
+		invalidCRC,
+		messageNotSupported
+	};
+
+	ErrorMessage(Reason reason)
+	: reason(reason)
+	{}
+
 	virtual void Parse(const etl::ivector<uint8_t>& data) {
 	}
+
+	Reason reason;
 };
 
 class OpenChannel : public AntResponseMessage
@@ -59,6 +72,6 @@ public:
 	uint8_t channelId;
 };
 
-typedef etl::variant<AntResponseMessage, UnassignChannel, UnkownMessage> AntMessage;
+typedef etl::variant<AntResponseMessage, UnassignChannel, ErrorMessage, OpenChannel> AntMessage;
 
 #endif
