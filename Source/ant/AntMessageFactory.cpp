@@ -1,4 +1,4 @@
-#include "AntHost.h"
+#include "AntHost.hpp"
 
 bool AntMessageFactory::MessageTypeAvailable(uint8_t id){
 	return mObjectCreator.find(id) != mObjectCreator.end();

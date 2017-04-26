@@ -12,9 +12,9 @@ else()
         message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-add_subdirectory (Test)
-add_subdirectory (Examples)
+add_subdirectory (test)
+add_subdirectory (examples)
 
 # application library
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/External/etl/src)
-add_library(${PROJECT_NAME} HbAlgo.cpp AntHost.cpp SensorSniffer.cpp AntMessageFactory.cpp SerialCommunication.cpp AntMessage.cpp)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/etl/src mapcontroller platform/interfaces )
+add_library(${PROJECT_NAME} HbAlgo.cpp ant/AntHost.cpp SensorSniffer.cpp ant/AntMessageFactory.cpp ant/AntMessage.cpp mapcontroller/MapController.cpp)

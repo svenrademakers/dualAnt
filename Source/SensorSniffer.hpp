@@ -1,7 +1,7 @@
 #ifndef SENSOR_SNIFFER_HPP
 #define SENSOR_SNIFFER_HPP
 
-#include "AntMessage.hpp"
+#include "ant/AntMessage.hpp"
 
 class IAntMessageFactory;
 class IAntProxy;
