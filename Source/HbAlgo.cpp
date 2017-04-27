@@ -1,4 +1,4 @@
-#include "HbAlgo.h"
+#include "HbAlgo.hpp"
 
 namespace
 {
@@ -33,7 +33,7 @@ uint32_t HbAlgo::HrPercentage(uint32_t RRinterval)
         return 0;
     else if ( RRinterval <= fastestRR)
         return 100;
-    
+
     return 200 - ((RRinterval*100)/fastestRR);
 }
 
@@ -45,7 +45,7 @@ uint16_t HbAlgo::HrZone(uint32_t RRInterval)
         return 0;
     else if (RRInterval == hrZone[0])
         return 59;
-    
+
     auto it = hrZone.begin();
     uint8_t i = hrZone.size();
     for (; i > 0 ; i--)
@@ -54,10 +54,10 @@ uint16_t HbAlgo::HrZone(uint32_t RRInterval)
             break;
         it++;
     }
-    
+
     if (i == 1)
         i = 0;
-    
+
     uint16_t end = *it - *(it-1);
     uint16_t val = *it - RRInterval;
     uint16_t res = (val*1000)/(end);

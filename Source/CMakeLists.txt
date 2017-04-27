@@ -15,9 +15,11 @@ endif()
 add_subdirectory (test)
 add_subdirectory (examples)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/external/etl/src 
+include_directories(
+	./
+	${CMAKE_CURRENT_SOURCE_DIR}/external/etl/src 
 	mapcontroller 
-	platform/interfaces mapviewer )
+	platform/interfaces)
 	
 add_library(${PROJECT_NAME} HbAlgo.cpp
 	SensorSniffer.cpp
