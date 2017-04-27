@@ -1,5 +1,22 @@
-#ifndef MAP_CONTROLLER_HPP
-#define MAP_CONTROLLER_HPP
+#include "MapViewerTangram.h"
 
+MapViewerTangram::MapViewerTangram()
+{
 
-#endif
+}
+
+void MapViewerTangram::UpdatePosition(double longitude, double latitude)
+{
+
+}
+
+void MapViewerTangram::Run()
+{
+
+}
+
+void MapViewerTangram::Exit()
+{
+
+}
+

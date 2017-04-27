@@ -12,13 +12,12 @@ else()
         message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-add_subdirectory (test)
-add_subdirectory (examples)
-
 include_directories(
 	./
 	${CMAKE_CURRENT_SOURCE_DIR}/external/etl/src 
-	mapcontroller 
+	mapcontroller
+	mapcontroller/mapviewer
+	mapcontroller/mapviewer/tangram
 	platform/interfaces)
 	
 add_library(${PROJECT_NAME} HbAlgo.cpp
@@ -28,3 +27,10 @@ add_library(${PROJECT_NAME} HbAlgo.cpp
 	ant/AntMessage.cpp 
 	mapcontroller/MapController.cpp
 	mapcontroller/mapviewer/tangram/MapViewerTangram.cpp)
+		
+add_subdirectory (test)
+add_subdirectory (examples)
+
+
+
+	
