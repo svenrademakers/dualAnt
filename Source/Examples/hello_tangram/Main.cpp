@@ -25,7 +25,7 @@ public:
 }
 	void RandomLatLon()
 	{
-		observer.PositionUpdate(fRand(0,30), fRand(0,30));
+		observer.PositionUpdate(fRand(-90,90), fRand(-180,180));
 	}
 
 private:
