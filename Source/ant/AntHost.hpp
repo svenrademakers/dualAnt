@@ -1,15 +1,20 @@
 #ifndef ANT_PARSER_HPP
 #define ANT_PARSER_HPP
 
-#include "AntMessageFactory.h"
+#include "AntMessageFactory.hpp"
 #include <stdint.h>
 #include "vector.h"
 #include "function.h"
 #include "observer.h"
 #include "antmessage.h"
-#include "SerialCommunication.h"
 
 class ISynchronousCommunication;
+
+class IAntProxy
+{
+public:
+	virtual void ExecuteCommand(const AntRequestMessage& message) = 0;
+};
 
 class AntHost : public IAntProxy
 {

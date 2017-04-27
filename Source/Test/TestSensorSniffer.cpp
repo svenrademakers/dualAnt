@@ -1,9 +1,9 @@
-#include <AntMessageFactory.h>
+#include "ant/AntMessageFactory.hpp"
 #include "gmock/gmock.h"
-#include "SensorSniffer.h"
-#include "antmessage.h"
-#include "SerialCommunication.h"
-#include "AntMessage.hpp"
+#include "SensorSniffer.hpp"
+#include "platform/interfaces/SerialCommunication.h"
+#include "ant/AntMessage.hpp"
+#include "ant/AntHost.hpp"
 
 using testing::_;
 using testing::SetArgReferee;

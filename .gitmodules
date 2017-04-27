@@ -1,3 +1,6 @@
 [submodule "Source/External/etl"]
 	path = Source/External/etl
 	url = https://github.com/ETLCPP/etl.git
+[submodule "Source/External/tangram-es"]
+	path = Source/External/tangram-es
+	url = https://github.com/tangrams/tangram-es.git

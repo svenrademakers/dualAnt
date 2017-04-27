@@ -13,10 +13,4 @@ public:
 	virtual void Init() = 0;
 };
 
-class IAntProxy
-{
-public:
-	virtual void ExecuteCommand(const AntRequestMessage& message) = 0;
-};
-
 #endif

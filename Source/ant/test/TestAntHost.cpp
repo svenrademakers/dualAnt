@@ -1,7 +1,7 @@
 #include "gmock/gmock.h"
-#include "AntHost.h"
+#include "ant/AntHost.hpp"
 #include <algorithm>
-#include "SerialCommunication.h"
+#include "platform/interfaces/SerialCommunication.h"
 
 #define ANT_SYNCA 0b10100100
 #define ANT_SYNC_RECV 0b10100101

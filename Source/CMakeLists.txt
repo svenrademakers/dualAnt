@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project (PerformanceAnalytics)
+project (dualant)
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
@@ -12,7 +12,25 @@ else()
         message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
-add_subdirectory (Test)
+include_directories(
+	./
+	${CMAKE_CURRENT_SOURCE_DIR}/external/etl/src 
+	mapcontroller
+	mapcontroller/mapviewer
+	mapcontroller/mapviewer/tangram
+	platform/interfaces)
+	
+add_library(${PROJECT_NAME} HbAlgo.cpp
+	SensorSniffer.cpp
+	ant/AntHost.cpp 
+	ant/AntMessageFactory.cpp 
+	ant/AntMessage.cpp 
+	mapcontroller/MapController.cpp
+	mapcontroller/mapviewer/tangram/MapViewerTangram.cpp)
+		
+add_subdirectory (test)
+add_subdirectory (examples)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/External/etl/src)
-add_library(${PROJECT_NAME} HbAlgo.cpp AntHost.cpp SensorSniffer.cpp AntMessageFactory.cpp SerialCommunication.cpp AntMessage.cpp)
+
+
+	

@@ -1,7 +1,7 @@
-#include "AntMessageFactory.h"
-#include "SensorSniffer.h"
-#include "antmessage.h"
+#include "ant/AntMessageFactory.hpp"
+#include "SensorSniffer.hpp"
 #include "SerialCommunication.h"
+#include "ant/AntHost.hpp"
 
 SensorSniffer::SensorSniffer(IAntProxy& antProxy, IAntMessageFactory& factory)
 : proxy(antProxy)
