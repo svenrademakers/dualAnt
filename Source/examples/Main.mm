@@ -2,10 +2,11 @@
 #include <stdlib.h>
 #include <chrono>
 #include <thread>
-
+#include <memory>
 #include "MapViewerTangram.h"
 #include "Gnss.hpp"
 #include "MapController.hpp"
+#include "platform_osx.h"
 
 namespace
 {
@@ -34,17 +35,18 @@ private:
 
 int main()
 {
-	static MapViewerTangram mapviewerTangram;
-	static MapController controller(mapviewerTangram);
-	static GnssDummy gnss(controller);
-
-	controller.Start();
-
-	while(1)
-	{
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-		gnss.RandomLatLon();
-	}
+	auto platform = std::make_shared<Tangram::OSXPlatform>();
+//	static MapViewerTangram mapviewerTangram(platform);
+//	static MapController controller(mapviewerTangram);
+//	static GnssDummy gnss(controller);
+//
+//	controller.Start();
+//
+//	while(1)
+//	{
+//		std::this_thread::sleep_for(std::chrono::seconds(1));
+//		gnss.RandomLatLon();
+//	}
 
 	return 0;
 }

@@ -1,6 +1,6 @@
 #include "gmock/gmock.h"
 #include "MapController.hpp"
-#include "mapviewer/IMapViewer.hpp"
+#include "IMapViewer.hpp"
 
 class MapViewerMock : public IMapViewer
 {

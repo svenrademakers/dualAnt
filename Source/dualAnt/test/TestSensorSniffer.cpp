@@ -1,7 +1,7 @@
-#include "ant/AntMessageFactory.hpp"
+#include "AntMessageFactory.hpp"
 #include "gmock/gmock.h"
 #include "SensorSniffer.hpp"
-#include "platform/interfaces/SerialCommunication.h"
+#include "SerialCommunication.h"
 #include "ant/AntMessage.hpp"
 #include "ant/AntHost.hpp"
 

@@ -1,9 +1,9 @@
 #ifndef ANT_MESSAGE_HPP
 #define ANT_MESSAGE_HPP
+#include "vector.h"
 
 #include "variant.h"
-#include "vector.h"
-#
+
 #define ANT_HEADERSIZE 5
 
 class AntResponseMessage

@@ -1,5 +1,5 @@
 #include "MapController.hpp"
-#include "mapviewer/IMapViewer.hpp"
+#include "IMapViewer.hpp"
 
 MapController::MapController(IMapViewer& map)
  : mapviewer(map)
