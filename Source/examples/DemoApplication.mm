@@ -6,7 +6,8 @@
 #include "MapViewerTangram.hpp"
 #include "Gnss.hpp"
 #include "MapController.hpp"
-#include "dummy.hpp"
+#include "platform_osx.h"
+
 namespace
 {
 double fRand(double fMin, double fMax)
@@ -35,7 +36,7 @@ private:
 
 int main()
 {
-    auto platform = std::make_shared<Tangram::DummyPlatform>();
+    auto platform = std::make_shared<Tangram::OSXPlatform>();
 	static MapViewerTangram mapviewerTangram(platform);
 	static MapController controller(mapviewerTangram);
 	static GnssDummy gnss(controller);

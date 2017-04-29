@@ -4,11 +4,12 @@ set(CMAKE_DEBUG_POSTFIX d)
 
 add_subdirectory (external)
 add_subdirectory (platform)
-add_subdirectory (dualAnt)
+add_subdirectory (dualant)
 add_subdirectory (mapviewer)
 
+#message(FATAL_ERROR ${CMAKE_BINARY_DIR}/lib)
 add_executable(DemoApplication MACOSX_BUNDLE examples/DemoApplication.mm)
-target_link_libraries(DemoApplication PUBLIC platform dualant mapviewer ${CMAKE_BINARY_DIR}/lib)
+target_link_libraries(DemoApplication PUBLIC platform dualant mapviewer ${CORE_LIBRARY} )
 set_property(TARGET DemoApplication PROPERTY CXX_STANDARD 14)
 
 install(TARGETS DemoApplication 
