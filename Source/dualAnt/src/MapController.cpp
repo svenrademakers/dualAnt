@@ -4,13 +4,12 @@
 MapController::MapController(IMapViewer& map)
  : mapviewer(map)
 {
+	if (mapviewer.Init(width, height))
 	Start();
 }
 
 MapController::~MapController()
-{
-	mapviewer.Exit();
-}
+{}
 
 void MapController::Start()
 {

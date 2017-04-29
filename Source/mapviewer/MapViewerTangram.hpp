@@ -8,14 +8,15 @@ class MapViewerTangram : public IMapViewer
 {
 public:
 	MapViewerTangram(std::shared_ptr<Tangram::Platform> platform);
-	virtual ~MapViewerTangram() {};
+	virtual ~MapViewerTangram();
 
 	// IMapViewer
+	virtual bool Init(int width, int height);
 	virtual void UpdatePosition(double longitude, double latitude);
 	virtual void Run();
-	virtual void Exit();
 private:
-	Tangram::Map* map;
+	void Exit();
+	Tangram::Map map;
 	std::shared_ptr<Tangram::Platform> platform;
 };
 

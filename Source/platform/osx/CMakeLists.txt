@@ -5,7 +5,7 @@ find_package(OpenGL REQUIRED)
 add_library(platform ${CMAKE_SOURCE_DIR}/external/tangram-es/platforms/common/platform_gl.cpp ${CMAKE_SOURCE_DIR}/external/tangram-es/platforms/common/glfwApp.cpp ${CMAKE_SOURCE_DIR}/external/tangram-es/platforms/osx/src/platform_osx.mm)	
 
 set_property(TARGET platform PROPERTY CXX_STANDARD 14)
-target_compile_definitions(platform PUBLIC PLATFORM_OSX)
+target_compile_definitions(platform PRIVATE PLATFORM_OSX)
 
 target_include_directories(platform 
 	PUBLIC

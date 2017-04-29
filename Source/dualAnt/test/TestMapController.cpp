@@ -7,7 +7,7 @@ class MapViewerMock : public IMapViewer
 public:
 	MOCK_METHOD2(UpdatePosition, void(double longitude, double latitude));
 	MOCK_METHOD0(Run, void());
-	MOCK_METHOD0(Exit, void());
+	MOCK_METHOD2(Init, bool(int,int));
 };
 
 class TestMapController : public ::testing::Test
@@ -24,7 +24,6 @@ protected:
 
 	virtual void TearDown()
 	{
-		EXPECT_CALL(mapviewer, Exit());
 		delete mapcontroller;
 	}
 };

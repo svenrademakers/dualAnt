@@ -3,7 +3,8 @@ add_library(mapviewer ${CMAKE_CURRENT_SOURCE_DIR}/MapViewerTangram.cpp)
 target_include_directories(mapviewer 
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-		$<INSTALL_INTERFACE:include/dualant/mapviewer>)
+		$<INSTALL_INTERFACE:include/dualant/mapviewer>
+		$<BUILD_INTERFACE:${GLFW_SOURCE_DIR}/include>)
 
 target_link_libraries(mapviewer PUBLIC dualant core)
 

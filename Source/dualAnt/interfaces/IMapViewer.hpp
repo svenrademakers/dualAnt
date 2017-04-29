@@ -4,9 +4,9 @@
 class IMapViewer
 {
 public:
+	virtual bool Init(int width, int height) = 0;
 	virtual void UpdatePosition(double longitude, double latitude) = 0;
 	virtual void Run() = 0;
-	virtual void Exit() = 0;
 };
 
 #endif
