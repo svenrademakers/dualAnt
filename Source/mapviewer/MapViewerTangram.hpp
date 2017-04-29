@@ -2,8 +2,8 @@
 #define MAP_VIEWER_TANGRAM_HPP
 #include "IMapViewer.hpp"
 #include <GLFW/glfw3.h>
-#include "tangram/tangram.h"
-#include "tangram/platform.h"
+#include "tangram.h"
+#include "platform.h"
 
 class MapViewerTangram : public IMapViewer
 {
