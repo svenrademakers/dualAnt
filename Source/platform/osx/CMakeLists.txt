@@ -12,7 +12,7 @@ target_include_directories(platform
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 		$<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/external/tangram-es/platforms/osx/src>
 		$<BUILD_INTERFACE:${GLFW_SOURCE_DIR}/include>)
-target_link_libraries(platform PUBLIC ${CORE_LIBRARY} glfw ${OPENGL_gl_LIBRARY})
+target_link_libraries(platform PUBLIC ${CORE_LIBRARY} glfw ${OPENGL_gl_LIBRARY} ${GLFW_LIBRARIES})
 
 install(TARGETS platform 
 	EXPORT 	platform-targets
