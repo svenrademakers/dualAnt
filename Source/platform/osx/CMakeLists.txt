@@ -1,9 +1,13 @@
 cmake_minimum_required(VERSION 3.8)
 
-add_library(platform ${CMAKE_SOURCE_DIR}/external/tangram-es/platforms/osx/src/platform_osx.mm)	
+add_library(platform dummy.cpp)	
 
 set_property(TARGET platform PROPERTY CXX_STANDARD 14)
+
 target_compile_definitions(platform PUBLIC PLATFORM_OSX)
+
+target_include_directories(platform PUBLIC
+	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 
 target_link_libraries(platform PRIVATE ${CORE_LIBRARY})
 

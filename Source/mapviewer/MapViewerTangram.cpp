@@ -1,4 +1,5 @@
 #include "MapViewerTangram.hpp"
+
 MapViewerTangram::MapViewerTangram(std::shared_ptr<Tangram::Platform> platform)
 	: map(new Tangram::Map(platform))
  {}

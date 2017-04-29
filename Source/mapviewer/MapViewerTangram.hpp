@@ -1,7 +1,6 @@
 #ifndef MAP_VIEWER_TANGRAM_HPP
 #define MAP_VIEWER_TANGRAM_HPP
 #include "IMapViewer.hpp"
-#include <GLFW/glfw3.h>
 #include "tangram.h"
 #include "platform.h"
 
