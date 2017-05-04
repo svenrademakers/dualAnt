@@ -6,10 +6,11 @@
 image: gcc:6.1
 
 pipelines:
-  default:
+  branches:
+  develop:
     - step:
-        script: # Modify the commands below to build your repository.
+        script: 
           - mkdir build
           - cd build
           - cmake ../Source
-          - make
+          - make microtests
