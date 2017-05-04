@@ -6,8 +6,7 @@
 image: gcc:6.1
 
 pipelines:
-  branches:
-  develop:
+  default:
     - step:
         script: 
           - mkdir build
