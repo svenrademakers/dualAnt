@@ -4,7 +4,7 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: 
-  name: svenenman/zephyrus:micro_test_env
+  name: svenenman/zephyrus:env2
   username: $USERNAME
   password: $PASSWORD
   email: $EMAIL
