@@ -3,7 +3,11 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: rikorose/gcc-cmake
+image: 
+name: svenenman/zephyrus:micro_test_env
+username: $USERNAME
+password: $PASSWORD
+email: $EMAIL
 
 pipelines:
   default:
